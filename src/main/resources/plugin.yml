@@ -1,0 +1,8 @@
+name: GlowWiki
+version: '${project.version}'
+main: com.ehhthan.glowwiki.GlowWiki
+api-version: 1.19
+prefix: GlowWiki
+authors: [ Ehhthan ]
+description: Wiki manager for crafters.one
+website: ehhthan.com
