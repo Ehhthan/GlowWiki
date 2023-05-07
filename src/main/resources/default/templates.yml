@@ -1,0 +1,6 @@
+player-page:
+  enabled: true
+  text: 'player-page.txt'
+head-creation:
+  enabled: false
+  text: 'head-creation.txt'

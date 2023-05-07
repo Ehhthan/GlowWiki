@@ -1,0 +1,8 @@
+date: MMMM d, yyyy
+wiki:
+  domain: "wiki.crafters.one"
+  script-path: ""
+  protocol: "https://"
+  credentials:
+    username: ""
+    password: ""

@@ -1,0 +1,13 @@
+{{Player
+|name=%username%
+|uuid=%uuid%
+|join=%join%
+|player-number=%number%
+}}
+== About ==
+
+== Trivia ==
+
+== Collectibles ==
+[[Category:Players]]
+[[Category:%year%]]
