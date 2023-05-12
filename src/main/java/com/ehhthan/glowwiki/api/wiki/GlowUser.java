@@ -1,6 +1,5 @@
 package com.ehhthan.glowwiki.api.wiki;
 
-import com.ehhthan.glowwiki.api.WikiAPI;
 import org.bukkit.configuration.ConfigurationSection;
 
 import javax.security.auth.login.FailedLoginException;

@@ -1,10 +1,11 @@
 package com.ehhthan.glowwiki.api;
 
 import com.ehhthan.glowwiki.GlowWiki;
-import com.ehhthan.glowwiki.api.wiki.PlayerPage;
-import com.ehhthan.glowwiki.api.template.Template;
+import com.ehhthan.glowwiki.api.event.WikiEvent;
+import com.ehhthan.glowwiki.api.event.action.EventAction;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 public class GlowAuditor {
     private final GlowWiki plugin;
@@ -13,12 +14,20 @@ public class GlowAuditor {
         this.plugin = plugin;
     }
 
-    public void runPlayerAudit() {
-        Template template = plugin.getTemplates().getTemplate("player-page");
-        if (template != null && template.isEnabled()) {
+    public void runPlayerAudit(String eventId) {
+        WikiEvent playerEvent = plugin.getEvents().getEvent(eventId);
+        if (playerEvent != null) {
             for (OfflinePlayer player : Bukkit.getOfflinePlayers()) {
-                new PlayerPage(player).create(plugin.getWikiAPI(), template);
+                run(player, playerEvent);
             }
+        }
+    }
+
+    private void run(OfflinePlayer player, WikiEvent event) {
+        for (EventAction action : event.getActions()) {
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                action.run(plugin.getWikiAPI(), player);
+            });
         }
     }
 }

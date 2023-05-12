@@ -1,14 +1,15 @@
 package com.ehhthan.glowwiki;
 
 import co.aikar.commands.PaperCommandManager;
-import com.ehhthan.glowwiki.api.WikiAPI;
-import com.ehhthan.glowwiki.api.template.TemplateManager;
+import com.ehhthan.glowwiki.api.GlowAuditor;
+import com.ehhthan.glowwiki.api.event.WikiEventManager;
+import com.ehhthan.glowwiki.api.wiki.GlowUser;
+import com.ehhthan.glowwiki.api.wiki.WikiAPI;
+import com.ehhthan.glowwiki.api.wiki.template.WikiTemplateManager;
 import com.ehhthan.glowwiki.command.GlowWikiCommand;
 import com.ehhthan.glowwiki.file.DirectoryCopyFileVisitor;
-import com.ehhthan.glowwiki.listeners.PlayerFirstJoinEvent;
-import com.ehhthan.glowwiki.listeners.PlayerHeadCreationEvent;
-import com.ehhthan.glowwiki.api.GlowAuditor;
-import com.ehhthan.glowwiki.api.wiki.GlowUser;
+import com.ehhthan.glowwiki.listeners.PlayerListener;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,7 +22,9 @@ import java.util.logging.Level;
 public final class GlowWiki extends JavaPlugin {
     private static GlowWiki INSTANCE;
 
-    private TemplateManager templates;
+
+    private WikiTemplateManager templates;
+    private WikiEventManager events;
     private GlowAuditor auditor;
     private WikiAPI wikiAPI;
 
@@ -43,7 +46,8 @@ public final class GlowWiki extends JavaPlugin {
             e.printStackTrace();
         }
 
-        this.templates = new TemplateManager(this);
+        this.templates = new WikiTemplateManager(this);
+        this.events = new WikiEventManager(this);
         this.auditor = new GlowAuditor(this);
 
         try {
@@ -54,9 +58,8 @@ public final class GlowWiki extends JavaPlugin {
         } catch (IOException | URISyntaxException | LoginException e) {
             e.printStackTrace();
         }
-        new PlayerFirstJoinEvent(this, "player-page");
-        new PlayerHeadCreationEvent(this, "head-creation");
 
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(this), this);
         registerCommands();
     }
 
@@ -70,8 +73,12 @@ public final class GlowWiki extends JavaPlugin {
         return INSTANCE;
     }
 
-    public TemplateManager getTemplates() {
+    public WikiTemplateManager getTemplates() {
         return templates;
+    }
+
+    public WikiEventManager getEvents() {
+        return events;
     }
 
     public GlowAuditor getAuditor() {

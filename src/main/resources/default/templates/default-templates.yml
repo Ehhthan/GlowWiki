@@ -1,0 +1,22 @@
+player:
+  wiki-template: "Player"
+  parameters:
+    name: USERNAME
+    uuid: UUID
+    player-details:
+      template: player-details
+    statistics:
+      template: statistics
+player-details:
+  wiki-template: "PlayerDetails"
+  parameters:
+    join: JOIN_DATE
+    player-number: JOIN_NUMBER
+    last-seen: LAST_SEEN
+statistics:
+  wiki-template: "Statistics"
+  parameters:
+    time-played: TIME_PLAYED
+    distance-traveled: DISTANCE_TRAVELED
+    player-kills: PLAYER_KILLS
+    deaths: DEATHS

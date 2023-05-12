@@ -1,0 +1,13 @@
+create-player-page:
+  event: ON_JOIN
+  actions:
+    upload-skin:
+      type: UPLOAD_FILE
+      url: "https://visage.surgeplay.com/full/600/%uuid%"
+      name: "%username%"
+      format: "png"
+    update-content:
+      type: EDIT_CONTENT
+      title: "%username%"
+      section: 0
+      file: player-content.txt

@@ -1,4 +1,4 @@
-package com.ehhthan.glowwiki.api;
+package com.ehhthan.glowwiki.api.wiki;
 
 /**
  *  @(#)Wiki.java 0.38 08/02/2019

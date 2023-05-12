@@ -1,4 +1,6 @@
-date: MMMM d, yyyy
+date-format: MMMM d, yyyy
+decimal-format: "###,###"
+
 wiki:
   domain: "wiki.crafters.one"
   script-path: ""
