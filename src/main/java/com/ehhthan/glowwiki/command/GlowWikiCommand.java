@@ -29,7 +29,7 @@ public class GlowWikiCommand extends BaseCommand {
     public void onAuditCommand(CommandSender sender, String function) {
         GlowAuditor auditor = plugin.getAuditor();
         if (function.equalsIgnoreCase("players")) {
-            auditor.runPlayerAudit();
+//            auditor.runPlayerAudit();
         }
         sender.sendMessage("Performing audit...");
     }

@@ -3,7 +3,7 @@ decimal-format: "###,###"
 
 wiki:
   domain: "wiki.crafters.one"
-  script-path: ""
+  script-path: "/mediawiki"
   protocol: "https://"
   credentials:
     username: ""

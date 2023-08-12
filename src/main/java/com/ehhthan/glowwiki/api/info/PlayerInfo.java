@@ -28,20 +28,33 @@ public enum PlayerInfo implements PlaceholderInfo {
     JOIN_NUMBER {
         @Override
         public String build(OfflinePlayer player) {
-            return decimalFormat().format(JoinDate.getPlugin().jnMap.get(player.getUniqueId()));
+            Integer number = JoinDate.getPlugin().jnMap.get(player.getUniqueId());
+            if (number != null && number > 0)
+                return decimalFormat().format(number);
+            else
+                return "?";
         }
     },
     LAST_SEEN {
         @Override
         public String build(OfflinePlayer player) {
-            return dateFormat().format(new Date(player.getLastSeen()));
+            long seen = player.getLastSeen();
+            if (seen > 0)
+                return dateFormat().format(new Date(seen));
+            else
+                return "?";
         }
     },
     JOIN_DATE {
         @Override
         public String build(OfflinePlayer player) {
-            return dateFormat().format(new Date(player.getFirstPlayed()));
+            long played = player.getFirstPlayed();
+            if (played > 0)
+                return dateFormat().format(new Date(played));
+            else
+                return "?";
         }
+
     },
     JOIN_YEAR {
         @Override
@@ -56,7 +69,7 @@ public enum PlayerInfo implements PlaceholderInfo {
             if (duration.toHours() != 0) {
                 return String.format("%d Hours", duration.toHours());
             } else {
-                return String.format("%02d Minutes", duration.toMinutesPart());
+                return String.format("%01d Minutes", duration.toMinutesPart());
             }
         }
     },
