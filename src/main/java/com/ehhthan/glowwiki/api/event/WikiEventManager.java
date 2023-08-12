@@ -1,7 +1,6 @@
 package com.ehhthan.glowwiki.api.event;
 
 import com.ehhthan.glowwiki.GlowWiki;
-import com.ehhthan.glowwiki.api.event.action.ActionType;
 import com.ehhthan.glowwiki.api.util.FormatUtil;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,7 +30,7 @@ public class WikiEventManager {
                 for (String key : config.getKeys(false)) {
                     ConfigurationSection section = config.getConfigurationSection(key);
                     if (section != null) {
-                        WikiEvent event = new WikiEvent(plugin.getWikiAPI(), section);
+                        WikiEvent event = new WikiEvent(section);
                         events.put(event.getId(), event);
                     }
                 }

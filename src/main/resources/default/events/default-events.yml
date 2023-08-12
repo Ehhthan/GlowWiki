@@ -4,10 +4,20 @@ create-player-page:
     upload-skin:
       type: UPLOAD_FILE
       url: "https://visage.surgeplay.com/full/600/%uuid%"
-      name: "%username%"
+      name: "%uuid%"
       format: "png"
     update-content:
       type: EDIT_CONTENT
-      title: "%username%"
+      title: "UUID:%uuid%"
       section: 0
       file: player-content.txt
+    redirect-1:
+      type: EDIT_CONTENT
+      title: "%username%"
+      section: 0
+      content: "#REDIRECT [[UUID:%uuid%]]"
+    redirect-2:
+      type: EDIT_CONTENT
+      title: "Player:%username%"
+      section: 0
+      content: "#REDIRECT [[UUID:%uuid%]]"

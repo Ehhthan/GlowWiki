@@ -14,7 +14,7 @@ public class WikiEvent {
     private final Type type;
     private final List<EventAction> actions = new LinkedList<>();
 
-    public WikiEvent(WikiAPI api, ConfigurationSection section) {
+    public WikiEvent(ConfigurationSection section) {
         this.id = FormatUtil.id(section.getName());
 
         this.type = Type.get(section.getString("event", "ON_JOIN"));
@@ -40,7 +40,8 @@ public class WikiEvent {
 
     public enum Type {
         ON_JOIN,
-        ON_QUIT;
+        ON_QUIT,
+        MANUAL;
 
         public static Type get(String id) {
             id = id.toUpperCase(Locale.ROOT).replace("-", "_").replace(" ", "_");

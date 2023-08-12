@@ -1,7 +1,7 @@
 package com.ehhthan.glowwiki;
 
 import co.aikar.commands.PaperCommandManager;
-import com.ehhthan.glowwiki.api.GlowAuditor;
+import com.ehhthan.glowwiki.api.audit.GlowAuditor;
 import com.ehhthan.glowwiki.api.event.WikiEventManager;
 import com.ehhthan.glowwiki.api.wiki.GlowUser;
 import com.ehhthan.glowwiki.api.wiki.WikiAPI;

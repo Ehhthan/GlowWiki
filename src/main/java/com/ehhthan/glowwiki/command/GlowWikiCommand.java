@@ -8,7 +8,7 @@ import co.aikar.commands.annotation.Description;
 import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.annotation.Syntax;
 import com.ehhthan.glowwiki.GlowWiki;
-import com.ehhthan.glowwiki.api.GlowAuditor;
+import com.ehhthan.glowwiki.api.audit.GlowAuditor;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("glowwiki|gw|wiki")
@@ -24,12 +24,12 @@ public class GlowWikiCommand extends BaseCommand {
     @Subcommand("audit")
     @CommandPermission("glowwiki.audit")
     @Description("Peform an audit.")
-    @CommandCompletion("players")
-    @Syntax("<players>")
-    public void onAuditCommand(CommandSender sender, String function) {
+    @CommandCompletion("players <event-name>")
+    @Syntax("<players> <event-name>")
+    public void onAuditCommand(CommandSender sender, String function, String arg) {
         GlowAuditor auditor = plugin.getAuditor();
         if (function.equalsIgnoreCase("players")) {
-//            auditor.runPlayerAudit();
+            auditor.runPlayerAudit(arg, sender);
         }
         sender.sendMessage("Performing audit...");
     }
