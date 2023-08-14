@@ -1,6 +1,8 @@
 package com.ehhthan.glowwiki;
 
 import co.aikar.commands.PaperCommandManager;
+import com.ehhthan.glowwiki.api.atlas.GlowAtlas;
+import com.ehhthan.glowwiki.api.atlas.GlowAtlasManager;
 import com.ehhthan.glowwiki.api.audit.GlowAuditor;
 import com.ehhthan.glowwiki.api.event.WikiEventManager;
 import com.ehhthan.glowwiki.api.wiki.GlowUser;
@@ -25,6 +27,7 @@ public final class GlowWiki extends JavaPlugin {
 
     private WikiTemplateManager templates;
     private WikiEventManager events;
+    private GlowAtlasManager atlases;
     private GlowAuditor auditor;
     private WikiAPI wikiAPI;
 
@@ -48,6 +51,7 @@ public final class GlowWiki extends JavaPlugin {
 
         this.templates = new WikiTemplateManager(this);
         this.events = new WikiEventManager(this);
+        this.atlases = new GlowAtlasManager(this);
         this.auditor = new GlowAuditor(this);
 
         try {
@@ -79,6 +83,10 @@ public final class GlowWiki extends JavaPlugin {
 
     public WikiEventManager getEvents() {
         return events;
+    }
+
+    public GlowAtlasManager getAtlases() {
+        return atlases;
     }
 
     public GlowAuditor getAuditor() {

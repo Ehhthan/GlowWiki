@@ -7,12 +7,13 @@ import org.bukkit.Statistic;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
 import java.util.Locale;
 
-public enum PlayerInfo implements PlaceholderInfo {
+public enum PlayerInfo implements GlowInfo {
     USERNAME {
         @Override
         public String build(OfflinePlayer player) {
@@ -30,7 +31,7 @@ public enum PlayerInfo implements PlaceholderInfo {
         public String build(OfflinePlayer player) {
             Integer number = JoinDate.getPlugin().jnMap.get(player.getUniqueId());
             if (number != null && number > 0)
-                return decimalFormat().format(number);
+                return smallFormat().format(number);
             else
                 return "?";
         }
@@ -66,17 +67,19 @@ public enum PlayerInfo implements PlaceholderInfo {
         @Override
         public String build(OfflinePlayer player) {
             Duration duration = Duration.ofSeconds(player.getStatistic(Statistic.PLAY_ONE_MINUTE) / 20);
-            if (duration.toHours() != 0) {
-                return String.format("%d Hours", duration.toHours());
+            long hours = duration.toHours();
+            if (hours != 0) {
+                return String.format("%d " + ((hours == 1) ? "Hour" : "Hours"), hours);
             } else {
-                return String.format("%01d Minutes", duration.toMinutesPart());
+                int minutes = duration.toMinutesPart();
+                return String.format("%01d " + ((minutes == 1) ? "Minute" : "Minutes"), minutes);
             }
         }
     },
     DISTANCE_TRAVELED {
         @Override
         public String build(OfflinePlayer player) {
-            return decimalFormat().format((player.getStatistic(Statistic.CLIMB_ONE_CM)
+            return largeFormat().format((player.getStatistic(Statistic.CLIMB_ONE_CM)
                 + player.getStatistic(Statistic.CROUCH_ONE_CM)
                 + player.getStatistic(Statistic.FALL_ONE_CM)
                 + player.getStatistic(Statistic.FLY_ONE_CM)
@@ -96,13 +99,13 @@ public enum PlayerInfo implements PlaceholderInfo {
     PLAYER_KILLS {
         @Override
         public String build(OfflinePlayer player) {
-            return decimalFormat().format(player.getStatistic(Statistic.PLAYER_KILLS));
+            return smallFormat().format(player.getStatistic(Statistic.PLAYER_KILLS));
         }
     },
     DEATHS {
         @Override
         public String build(OfflinePlayer player) {
-            return decimalFormat().format(player.getStatistic(Statistic.DEATHS));
+            return smallFormat().format(player.getStatistic(Statistic.DEATHS));
         }
     };
 
@@ -110,8 +113,12 @@ public enum PlayerInfo implements PlaceholderInfo {
         return new SimpleDateFormat(GlowWiki.getInstance().getConfig().getString("date-format", "MMMM d, yyyy"));
     }
 
-    private static DecimalFormat decimalFormat() {
+    private static DecimalFormat smallFormat() {
         return new DecimalFormat(GlowWiki.getInstance().getConfig().getString("decimal-format", "###,###"));
+    }
+
+    private static NumberFormat largeFormat() {
+        return NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.LONG);
     }
 
     public abstract String build(OfflinePlayer player);

@@ -1,6 +1,6 @@
 package com.ehhthan.glowwiki.api.event.action;
 
-import com.ehhthan.glowwiki.api.info.PlaceholderInfo;
+import com.ehhthan.glowwiki.api.info.GlowInfo;
 import com.ehhthan.glowwiki.api.wiki.WikiAPI;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -23,8 +23,8 @@ public class CopyContentAction extends EventAction {
     @Override
     public void run(WikiAPI api, OfflinePlayer player) {
         try {
-            String original = PlaceholderInfo.parse(this.original, player);
-            String newPage = PlaceholderInfo.parse(this.newPage, player);
+            String original = GlowInfo.parse(this.original, player);
+            String newPage = GlowInfo.parse(this.newPage, player);
 
             if (api.exists(List.of(original))[0]) {
                 String content = api.getSectionText(original, 0);

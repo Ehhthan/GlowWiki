@@ -1,7 +1,7 @@
 package com.ehhthan.glowwiki.api.event.action;
 
 import com.ehhthan.glowwiki.GlowWiki;
-import com.ehhthan.glowwiki.api.info.PlaceholderInfo;
+import com.ehhthan.glowwiki.api.info.GlowInfo;
 import com.ehhthan.glowwiki.api.wiki.WikiAPI;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -27,13 +27,13 @@ public class UploadFileAction extends EventAction {
     @Override
     public void run(WikiAPI api, OfflinePlayer player) {
         try {
-            BufferedImage image = ImageIO.read(new URL(PlaceholderInfo.parse(url, player)));
+            BufferedImage image = ImageIO.read(new URL(GlowInfo.parse(url, player)));
             File file = new File(GlowWiki.getInstance().getDataFolder(), "cache/" +
-                PlaceholderInfo.parse(name + "." + format, player));
+                GlowInfo.parse(name + "." + format, player));
 
             if (!api.exists(List.of("File:" + file.getName()))[0]) {
                 file.mkdirs();
-                ImageIO.write(image, PlaceholderInfo.parse(format, player), file);
+                ImageIO.write(image, GlowInfo.parse(format, player), file);
                 api.upload(file, file.getName(), "", "Uploaded file.");
                 file.deleteOnExit();
             }

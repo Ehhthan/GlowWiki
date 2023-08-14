@@ -1,7 +1,7 @@
 package com.ehhthan.glowwiki.api.event.action;
 
 import com.ehhthan.glowwiki.GlowWiki;
-import com.ehhthan.glowwiki.api.info.PlaceholderInfo;
+import com.ehhthan.glowwiki.api.info.GlowInfo;
 import com.ehhthan.glowwiki.api.wiki.WikiAPI;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -37,7 +37,7 @@ public class EditContentAction extends EventAction {
     @Override
     public void run(WikiAPI api, OfflinePlayer player) {
         try {
-            api.edit(PlaceholderInfo.parse(title, player), PlaceholderInfo.parse(content, player),
+            api.edit(GlowInfo.parse(title, player), GlowInfo.parse(content, player),
                 "Updated content.", section);
         } catch (IOException | LoginException e) {
             e.printStackTrace();

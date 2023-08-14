@@ -1,0 +1,41 @@
+player-rank:
+  placeholder: "%luckperms_highest_group_by_weight%"
+  options:
+    glow-person:
+      value: "Game Master"
+    volunteer:
+      value: "Volunteer"
+  default:
+    value: "Player"
+
+player-rank-color:
+  placeholder: "%luckperms_highest_group_by_weight%"
+  options:
+    glow-person:
+      atlas: glow-color
+    volunteer:
+      value: "#ffbb00"
+  default:
+    value: "#9abed6"
+
+glow-color:
+  info: UUID
+  options:
+    956527ca-28f4-4b6e-834c-4610de3be019: # GlowTurtle
+      value: "#86f76d"
+    31a074e3-a15a-474d-be1b-57b3848f61cf: # GlowSteve
+      value: "#62f5df"
+    584a3568-be6e-4784-8647-5029fd21fa1a: # GlowFelix
+      value: "#c9c9c9"
+    d071668f-d7b9-42d2-afd5-5e195eda95ae: # GlowDave
+      value: "#db7b14"
+    509b37b9-ff23-4458-a4da-a6291027b145: # GlowChad
+      value: "#b3273c"
+    a30a1c6f-0aa8-4538-bcae-aa1fb9465d48: # GlowBot
+      value: "#f50529"
+    80b9a308-9315-4cf0-a0f6-7d5c3ccc4fa4: # GlowBob
+      value: "#9c32ed"
+    78d10d8a-2c8a-4dc4-a234-7cd273127e09: # GlowAlex
+      value: "#1a8f00"
+  default:
+    value: "#f05d5d"

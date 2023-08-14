@@ -4,7 +4,7 @@ import com.ehhthan.glowwiki.GlowWiki;
 import com.ehhthan.glowwiki.api.wiki.template.WikiTemplate;
 import org.bukkit.OfflinePlayer;
 
-public class TemplateInfo implements PlaceholderInfo {
+public class TemplateInfo implements GlowInfo {
     private final String templateId;
 
     public TemplateInfo(String templateId) {

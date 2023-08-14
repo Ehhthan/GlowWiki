@@ -5,7 +5,7 @@ import org.bukkit.OfflinePlayer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public interface PlaceholderInfo {
+public interface GlowInfo {
     Pattern PLACEHOLDER_PATTERN = Pattern.compile("[%]([^%]+)[%]");
     Pattern TEMPLATE_PATTERN = Pattern.compile("[%]template-([^%]+)[%]");
 

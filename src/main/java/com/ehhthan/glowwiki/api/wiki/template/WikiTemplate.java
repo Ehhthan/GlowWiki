@@ -1,6 +1,6 @@
 package com.ehhthan.glowwiki.api.wiki.template;
 
-import com.ehhthan.glowwiki.api.info.PlaceholderInfo;
+import com.ehhthan.glowwiki.api.info.GlowInfo;
 import com.ehhthan.glowwiki.api.info.PlayerInfo;
 import com.ehhthan.glowwiki.api.info.TemplateInfo;
 import com.ehhthan.glowwiki.api.util.FormatUtil;
@@ -13,7 +13,7 @@ import java.util.Map;
 public class WikiTemplate {
     private final String id;
     private final String template;
-    private final Map<String, PlaceholderInfo> parameters = new LinkedHashMap<>();
+    private final Map<String, GlowInfo> parameters = new LinkedHashMap<>();
 
     public WikiTemplate(ConfigurationSection section) {
         this.id = FormatUtil.id(section.getName());
@@ -37,7 +37,7 @@ public class WikiTemplate {
     public String build(OfflinePlayer player) {
         StringBuilder builder = new StringBuilder().append("{{").append(template);
 
-        for (Map.Entry<String, PlaceholderInfo> parameter : parameters.entrySet()) {
+        for (Map.Entry<String, GlowInfo> parameter : parameters.entrySet()) {
             String build = parameter.getValue().build(player);
             if (build != null && !build.isEmpty())
                 builder.append("|").append(parameter.getKey()).append("=").append(build);

@@ -500,14 +500,14 @@ public class WikiAPI implements Comparable<WikiAPI>
     // preferences
     private int max = 500;
     private int slowmax = 50;
-    private int throttle = 10000;
+    private int throttle = 2000;
     private int maxlag = 5;
     private int assertion = ASSERT_NONE; // assertion mode
     private int statusinterval = 100; // status check
     private int querylimit = Integer.MAX_VALUE;
     private String useragent = "WikiAPI.java/" + version + " (https://github.com/MER-C/wiki-java/)";
     private boolean zipped = true;
-    private boolean markminor = false, markbot = false;
+    private boolean markminor = false, markbot = true;
     private boolean resolveredirect = false;
     private Level loglevel = Level.ALL;
     private static final Logger logger = Logger.getLogger("wiki");
