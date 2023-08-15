@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public interface GlowInfo {
     Pattern PLACEHOLDER_PATTERN = Pattern.compile("[%]([^%]+)[%]");
-    Pattern TEMPLATE_PATTERN = Pattern.compile("[%]template-([^%]+)[%]");
+    Pattern SPECIAL_PATTERN = Pattern.compile("[%]([a-zA-Z]+)-([^%]+)[%]");
 
     String build(OfflinePlayer player);
 
@@ -17,9 +17,15 @@ public interface GlowInfo {
 
         while (matcher.find()) {
             String placeholder = matcher.group();
-            Matcher template = TEMPLATE_PATTERN.matcher(placeholder);
-            if (template.find()) {
-                newText = newText.replace(placeholder, new TemplateInfo(template.group(1)).build(player));
+            Matcher special = SPECIAL_PATTERN.matcher(placeholder);
+            if (special.find()) {
+                String type = special.group(1);
+                String value = special.group(2);
+                if (type.equalsIgnoreCase("template"))
+                    newText = newText.replace(placeholder, new TemplateInfo(value).build(player));
+                else if (type.equalsIgnoreCase("atlas"))
+                    newText = newText.replace(placeholder, new AtlasInfo(value).build(player));
+
             } else {
                 newText = newText.replace(placeholder, PlayerInfo.get(matcher.group(1)).build(player));
             }

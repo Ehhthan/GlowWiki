@@ -9,6 +9,10 @@ import co.aikar.commands.annotation.Subcommand;
 import co.aikar.commands.annotation.Syntax;
 import com.ehhthan.glowwiki.GlowWiki;
 import com.ehhthan.glowwiki.api.audit.GlowAuditor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.command.CommandSender;
 
 @CommandAlias("glowwiki|gw|wiki")
@@ -32,5 +36,17 @@ public class GlowWikiCommand extends BaseCommand {
             auditor.runPlayerAudit(arg, sender);
         }
         sender.sendMessage("Performing audit...");
+    }
+
+    @Subcommand("reload")
+    @CommandPermission("glowwiki.reload")
+    @Description("Peform a reload.")
+    public void onReloadCommand(CommandSender sender) {
+        plugin.reload();
+
+        sender.sendMessage(Component.text("Reloading GlowWiki.").decorate(TextDecoration.BOLD).color(NamedTextColor.GREEN));
+        sender.sendMessage(Component.text("Reloaded " + plugin.getTemplates().values().size() + " Templates").color(NamedTextColor.RED));
+        sender.sendMessage(Component.text("Reloaded " + plugin.getEvents().values().size() + " Events").color(NamedTextColor.BLUE));
+        sender.sendMessage(Component.text("Reloaded " + plugin.getAtlases().values().size() + " Atlases").color(NamedTextColor.YELLOW));
     }
 }

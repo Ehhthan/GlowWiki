@@ -2,12 +2,14 @@ package com.ehhthan.glowwiki.api.event;
 
 import com.ehhthan.glowwiki.GlowWiki;
 import com.ehhthan.glowwiki.api.util.FormatUtil;
+import com.ehhthan.glowwiki.api.wiki.template.WikiTemplate;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +49,11 @@ public class WikiEventManager {
         return events.get(FormatUtil.id(id));
     }
 
-    public List<WikiEvent> getEvents(WikiEvent.Type type) {
+    public List<WikiEvent> fromType(WikiEvent.Type type) {
         return events.values().stream().filter(c -> c.getType() == type).collect(Collectors.toList());
+    }
+
+    public Collection<WikiEvent> values() {
+        return events.values();
     }
 }

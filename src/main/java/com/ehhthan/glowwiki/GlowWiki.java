@@ -30,6 +30,7 @@ public final class GlowWiki extends JavaPlugin {
     private GlowAtlasManager atlases;
     private GlowAuditor auditor;
     private WikiAPI wikiAPI;
+    private PlayerListener playerListener;
 
     @Override
     public void onEnable() {
@@ -53,6 +54,7 @@ public final class GlowWiki extends JavaPlugin {
         this.events = new WikiEventManager(this);
         this.atlases = new GlowAtlasManager(this);
         this.auditor = new GlowAuditor(this);
+        this.playerListener = new PlayerListener(this);
 
         try {
             ConfigurationSection section = getConfig().getConfigurationSection("wiki");
@@ -63,8 +65,15 @@ public final class GlowWiki extends JavaPlugin {
             e.printStackTrace();
         }
 
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(this), this);
+        Bukkit.getPluginManager().registerEvents(playerListener, this);
         registerCommands();
+    }
+
+    public void reload() {
+        templates.reload(this);
+        events.reload(this);
+        atlases.reload(this);
+        playerListener.reload(events);
     }
 
     private void registerCommands() {

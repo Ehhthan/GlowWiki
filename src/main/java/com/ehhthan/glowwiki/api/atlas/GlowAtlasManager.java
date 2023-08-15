@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,5 +47,9 @@ public class GlowAtlasManager {
     @Nullable
     public GlowAtlas getAtlas(@NotNull String id) {
         return atlases.get(FormatUtil.id(id));
+    }
+
+    public Collection<GlowAtlas> values() {
+        return atlases.values();
     }
 }

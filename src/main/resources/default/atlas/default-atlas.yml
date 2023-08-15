@@ -21,6 +21,8 @@ player-rank-color:
 glow-color:
   info: UUID
   options:
+    ac87e455-33a4-4183-9e5e-c45159cc55d7: # CrafterOne
+      value: "#7824ff"
     956527ca-28f4-4b6e-834c-4610de3be019: # GlowTurtle
       value: "#86f76d"
     31a074e3-a15a-474d-be1b-57b3848f61cf: # GlowSteve

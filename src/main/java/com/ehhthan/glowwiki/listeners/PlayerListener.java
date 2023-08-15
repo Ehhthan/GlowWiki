@@ -4,7 +4,6 @@ import com.ehhthan.glowwiki.GlowWiki;
 import com.ehhthan.glowwiki.api.event.WikiEvent;
 import com.ehhthan.glowwiki.api.event.WikiEventManager;
 import com.ehhthan.glowwiki.api.event.action.EventAction;
-import com.ehhthan.glowwiki.api.wiki.WikiAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,8 +26,9 @@ public class PlayerListener implements Listener {
     }
 
     public void reload(WikiEventManager eventManager) {
+        events.clear();
         for (WikiEvent.Type type : WikiEvent.Type.values()) {
-            events.put(type, eventManager.getEvents(type));
+            events.put(type, eventManager.fromType(type));
         }
     }
 

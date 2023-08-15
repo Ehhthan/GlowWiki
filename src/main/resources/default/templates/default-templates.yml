@@ -1,22 +1,22 @@
 player:
   wiki-template: "Player"
   parameters:
-    name: USERNAME
-    uuid: UUID
-    player-details:
-      template: player-details
-    statistics:
-      template: statistics
+    name: "%username%"
+    uuid: "%uuid%"
+    player-details: "%template-player-details%"
+    statistics: "%template-statistics%"
+    role: "%atlas-player-rank%"
+    role-color: "%atlas-player-rank-color%"
 player-details:
   wiki-template: "PlayerDetails"
   parameters:
-    join: JOIN_DATE
-    player-number: JOIN_NUMBER
-    last-seen: LAST_SEEN
+    join: "%join_date%"
+    player-number: "%join_number%"
+    last-seen: "%last_seen%"
 statistics:
   wiki-template: "Statistics"
   parameters:
-    time-played: TIME_PLAYED
-    distance-traveled: DISTANCE_TRAVELED
-    player-kills: PLAYER_KILLS
-    deaths: DEATHS
+    time-played: "%time_played%"
+    distance-traveled: "%distance_traveled%"
+    player-kills: "%player_kills%"
+    deaths: "%deaths%"

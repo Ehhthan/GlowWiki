@@ -118,7 +118,7 @@ public enum PlayerInfo implements GlowInfo {
     }
 
     private static NumberFormat largeFormat() {
-        return NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.LONG);
+        return NumberFormat.getCompactNumberInstance(Locale.US, NumberFormat.Style.SHORT);
     }
 
     public abstract String build(OfflinePlayer player);
