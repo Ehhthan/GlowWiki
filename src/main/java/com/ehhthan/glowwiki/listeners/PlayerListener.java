@@ -46,7 +46,11 @@ public class PlayerListener implements Listener {
         for (WikiEvent event : events.get(type)) {
             for (EventAction action : event.getActions()) {
                 Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                    action.run(plugin.getWikiAPI(), player);
+                    try {
+                        action.run(plugin.getWikiAPI(), player);
+                    } catch (SecurityException e) {
+                        GlowWiki.getInstance().getUser().reload();
+                    }
                 });
 
             }

@@ -29,8 +29,8 @@ public final class GlowWiki extends JavaPlugin {
     private WikiEventManager events;
     private GlowAtlasManager atlases;
     private GlowAuditor auditor;
-    private WikiAPI wikiAPI;
     private PlayerListener playerListener;
+    private GlowUser glowUser;
 
     @Override
     public void onEnable() {
@@ -50,26 +50,28 @@ public final class GlowWiki extends JavaPlugin {
             e.printStackTrace();
         }
 
+        try {
+            ConfigurationSection section = getConfig().getConfigurationSection("wiki");
+            if (section != null) {
+                this.glowUser = new GlowUser(section);
+                glowUser.login();
+            }
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+
         this.templates = new WikiTemplateManager(this);
         this.events = new WikiEventManager(this);
         this.atlases = new GlowAtlasManager(this);
         this.auditor = new GlowAuditor(this);
         this.playerListener = new PlayerListener(this);
 
-        try {
-            ConfigurationSection section = getConfig().getConfigurationSection("wiki");
-            if (section != null) {
-                wikiAPI = new GlowUser(section).login();
-            }
-        } catch (IOException | URISyntaxException | LoginException e) {
-            e.printStackTrace();
-        }
-
         Bukkit.getPluginManager().registerEvents(playerListener, this);
         registerCommands();
     }
 
     public void reload() {
+        glowUser.reload();
         templates.reload(this);
         events.reload(this);
         atlases.reload(this);
@@ -102,7 +104,11 @@ public final class GlowWiki extends JavaPlugin {
         return auditor;
     }
 
+    public GlowUser getUser() {
+        return glowUser;
+    }
+
     public WikiAPI getWikiAPI() {
-        return wikiAPI;
+        return glowUser.getApi();
     }
 }

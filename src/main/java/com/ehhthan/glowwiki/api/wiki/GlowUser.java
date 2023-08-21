@@ -1,5 +1,6 @@
 package com.ehhthan.glowwiki.api.wiki;
 
+import com.ehhthan.glowwiki.GlowWiki;
 import org.bukkit.configuration.ConfigurationSection;
 
 import javax.security.auth.login.FailedLoginException;
@@ -9,6 +10,8 @@ import java.net.URISyntaxException;
 
 public class GlowUser {
     private final String domain, scriptPath, protocol, username, password;
+
+    private WikiAPI api;
 
     public GlowUser(ConfigurationSection section) throws IOException, URISyntaxException {
         this(section.getString("domain"),
@@ -26,17 +29,26 @@ public class GlowUser {
         this.password = password;
     }
 
-    public WikiAPI login() throws LoginException, IOException {
-        WikiAPI wikiAPI = WikiAPI.newSession(domain, scriptPath, protocol);
-        wikiAPI.setThrottle(5000);
+    public WikiAPI getApi() {
+        return api;
+    }
+
+    public void login() {
+        api = WikiAPI.newSession(domain, scriptPath, protocol);
+        api.setThrottle(1000);
         try {
-            wikiAPI.login(username, password);
+            api.login(username, password);
         } catch (FailedLoginException | IOException ex) {
             // deal with failed login attempt
             ex.printStackTrace();
-            System.exit(1);
+        }
+    }
+
+    public void reload() {
+        if (api != null) {
+            api.logout();
         }
 
-        return wikiAPI;
+        login();
     }
 }
