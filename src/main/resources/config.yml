@@ -8,3 +8,5 @@ wiki:
   credentials:
     username: ""
     password: ""
+
+debug: false

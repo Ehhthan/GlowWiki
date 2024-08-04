@@ -20,6 +20,8 @@ package com.ehhthan.glowwiki.api.wiki;
  *  Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+import com.ehhthan.glowwiki.GlowWiki;
+
 import javax.security.auth.login.AccountLockedException;
 import javax.security.auth.login.CredentialException;
 import javax.security.auth.login.CredentialExpiredException;
@@ -8863,7 +8865,9 @@ public class WikiAPI implements Comparable<WikiAPI>
      */
     protected void log(Level level, String method, String text)
     {
-        logger.logp(level, "WikiAPI", method, "[{0}] {1}", new Object[] { domain, text });
+        // Only log if debug is enabled.
+        if (GlowWiki.getInstance().getConfig().getBoolean("debug", false))
+            logger.logp(level, "WikiAPI", method, "[{0}] {1}", new Object[] { domain, text });
     }
 
     /**
@@ -8874,6 +8878,8 @@ public class WikiAPI implements Comparable<WikiAPI>
      */
     protected void logurl(String url, String method)
     {
-        logger.logp(Level.INFO, "WikiAPI", method, "Fetching URL {0}", url);
+        // Only log if debug is enabled.
+        if (GlowWiki.getInstance().getConfig().getBoolean("debug", false))
+            logger.logp(Level.INFO, "WikiAPI", method, "Fetching URL {0}", url);
     }
 }
